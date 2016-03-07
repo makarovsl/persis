@@ -84,6 +84,12 @@
       <DependentUpon>MaterialAddForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ButtonNavigation.cs" />
+    <Compile Include="Controls\ContainList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ContainList.Designer.cs">
+      <DependentUpon>ContainList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Paginator.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -118,6 +124,12 @@
     <Compile Include="ListForms\MaterialListForm.Designer.cs">
       <DependentUpon>MaterialListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListForms\ProductListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListForms\ProductListForm.Designer.cs">
+      <DependentUpon>ProductListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +140,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddForms\MaterialAddForm.resx">
       <DependentUpon>MaterialAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ContainList.resx">
+      <DependentUpon>ContainList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Paginator.resx">
       <DependentUpon>Paginator.cs</DependentUpon>
@@ -144,6 +159,9 @@
     <EmbeddedResource Include="ListForms\MaterialListForm.resx">
       <DependentUpon>MaterialListForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ListForms\ProductListForm.resx">
+      <DependentUpon>ProductListForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -158,9 +176,10 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Core.Models.ContainObjectItem.datasource" />
     <None Include="Properties\DataSources\Core.Models.Detail.DetailListAnswer.datasource" />
     <None Include="Properties\DataSources\Core.Models.Material.MaterialListAnswer.datasource" />
-    <None Include="Properties\DataSources\Core.Models.Material.MaterialOfDetailItem.datasource" />
+    <None Include="Properties\DataSources\Core.Models.Product.ProductListAnswer.datasource" />
     <None Include="Properties\DataSources\Core.Models.SimpleListItem.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -190,6 +209,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\delete-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

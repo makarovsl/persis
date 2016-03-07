@@ -71,6 +71,9 @@ namespace Client
             _container.RegisterInstance(typeof(DetailAction));
             _container.RegisterType<IDetailAction, DetailAction>(new ContainerControlledLifetimeManager());
 
+            _container.RegisterInstance(typeof(ProductAction));
+            _container.RegisterType<IProductAction, ProductAction>(new ContainerControlledLifetimeManager());
+
             #endregion
         }
 

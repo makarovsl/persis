@@ -61,8 +61,10 @@
             this.detailGridView.DataSource = this.detailListAnswerBindingSource;
             this.detailGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.detailGridView.Location = new System.Drawing.Point(0, 0);
+            this.detailGridView.MultiSelect = false;
             this.detailGridView.Name = "detailGridView";
             this.detailGridView.ReadOnly = true;
+            this.detailGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.detailGridView.Size = new System.Drawing.Size(760, 228);
             this.detailGridView.TabIndex = 1;
             // 

@@ -7,7 +7,7 @@ namespace Core.OperationInterfaces
     {
         int GetListCount();
         DetailListAnswer[] GetList(DetailListModel listModel);
-
         DetailDetailAnswer GetDetail(Guid id);
+        Guid UpdateDetail(DetailUpdateModel updateModel);
     }
 }

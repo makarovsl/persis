@@ -16,6 +16,7 @@ namespace Client
             materialListButtomMenu.Tag = new ButtonNavigation {FormType = typeof (MaterialListForm)};
             detailButtonMenu.Tag = new ButtonNavigation {FormType = typeof (DetailListForm)};
             addDetailButtonMenu.Tag = new ButtonNavigation {FormType = typeof (DetailAddForm)};
+            productButtonMenu.Tag = new ButtonNavigation { FormType = typeof(ProductListForm) };
         }
 
         public void OpenMdiChildForm(object sender, EventArgs e)

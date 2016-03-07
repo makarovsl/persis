@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core.Models.Material;
 
 namespace Core.Models.Detail
 {
@@ -22,7 +21,7 @@ namespace Core.Models.Detail
         /// <summary>
         /// Список выбранных материалов
         /// </summary>
-        public MaterialOfDetailItem[] Materials;
+        public List<ContainObjectItem> Materials;
 
     }
 }

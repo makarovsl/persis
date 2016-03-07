@@ -39,6 +39,8 @@ namespace Client
             this.деталиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.detailButtonMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.addDetailButtonMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.изделияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.productButtonMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +57,8 @@ namespace Client
             // 
             this.справочникиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.материалыToolStripMenuItem,
-            this.деталиToolStripMenuItem});
+            this.деталиToolStripMenuItem,
+            this.изделияToolStripMenuItem});
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
             this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
             this.справочникиToolStripMenuItem.Text = "Справочники";
@@ -106,6 +109,20 @@ namespace Client
             this.addDetailButtonMenu.Text = "Добавить деталь";
             this.addDetailButtonMenu.Click += new System.EventHandler(this.OpenMdiChildForm);
             // 
+            // изделияToolStripMenuItem
+            // 
+            this.изделияToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.productButtonMenu});
+            this.изделияToolStripMenuItem.Name = "изделияToolStripMenuItem";
+            this.изделияToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.изделияToolStripMenuItem.Text = "Изделия";
+            // 
+            // productButtonMenu
+            // 
+            this.productButtonMenu.Name = "productButtonMenu";
+            this.productButtonMenu.Size = new System.Drawing.Size(163, 22);
+            this.productButtonMenu.Text = "Список изделий";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -133,5 +150,7 @@ namespace Client
         private System.Windows.Forms.ToolStripMenuItem деталиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem detailButtonMenu;
         private System.Windows.Forms.ToolStripMenuItem addDetailButtonMenu;
+        private System.Windows.Forms.ToolStripMenuItem изделияToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem productButtonMenu;
     }
 }

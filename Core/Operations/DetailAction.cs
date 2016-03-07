@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Transactions;
 using Core.Models;
 using Core.Models.Detail;
-using Core.Models.Material;
 using Core.OperationInterfaces;
 using DAL.Common.DbEntity;
 using DAL.Entity;
@@ -18,11 +18,20 @@ namespace Core.Operations
             _detail = detail;
         }
 
+        /// <summary>
+        /// Получение количества деталей в БД для пэйджинга
+        /// </summary>
+        /// <returns>Количество деталей</returns>
         public int GetListCount()
         {
             return _detail.GetCollection().Count();
         }
 
+        /// <summary>
+        /// Получение списка деталей
+        /// </summary>
+        /// <param name="listModel"></param>
+        /// <returns></returns>
         public DetailListAnswer[] GetList(DetailListModel listModel)
         {
             if (listModel.PageNumber <= 0 || listModel.PageSize <= 0)
@@ -40,6 +49,11 @@ namespace Core.Operations
                     .ToArray();
         }
 
+        /// <summary>
+        /// Получение деталей сущности "Детали"
+        /// </summary>
+        /// <param name="id">Идентификатор</param>
+        /// <returns></returns>
         public DetailDetailAnswer GetDetail(Guid id)
         {
             var detail = _detail.GetByIdWithInclude(id);
@@ -50,13 +64,28 @@ namespace Core.Operations
             {
                 Id = detail.Id,
                 Name = detail.Name,
-                Materials = detail.MaterialsOfDetail.Select(s=> new MaterialOfDetailItem
+                Materials = detail.MaterialsOfDetail.Select(s=> new ContainObjectItem
                 {
-                    MaterialId = s.MaterialId,
-                    MaterialName = s.Material.Name,
-                    MaterialCount = s.MaterialCount
-                }).ToArray()
+                    Id = s.MaterialId,
+                    Count = s.MaterialCount
+                }).ToList()
             };
+        }
+
+        public Guid UpdateDetail(DetailUpdateModel updateModel)
+        {
+            if(String.IsNullOrEmpty(updateModel.Name))
+                throw new Exception("Имя не может быть пустым");
+
+            using (var transaction = new TransactionScope())
+            {
+                _detail.Update(updateModel.GetEntity());
+
+                transaction.Complete();
+            }
+
+
+            return updateModel.Id;
         }
     }
 }

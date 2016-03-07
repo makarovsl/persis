@@ -27,6 +27,8 @@ namespace Client.ListForms
             var columnIndex = ((DataGridViewCellEventArgs)e).ColumnIndex;
             var rowIndex = ((DataGridViewCellEventArgs)e).RowIndex;
 
+            if(rowIndex<0 || columnIndex<0)
+                return;
             var column = ((DataGridView)sender).Columns[columnIndex];
 
             if (column is DataGridViewImageColumn || column is DataGridViewButtonColumn)
