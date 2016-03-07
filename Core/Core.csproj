@@ -46,13 +46,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\ContainObjectItem.cs" />
+    <Compile Include="Models\Detail\DetailAddModel.cs" />
     <Compile Include="Models\Detail\DetailDetailAnswer.cs" />
     <Compile Include="Models\Detail\DetailListAnswer.cs" />
     <Compile Include="Models\Detail\DetailListModel.cs" />
     <Compile Include="Models\Detail\DetailUpdateModel.cs" />
     <Compile Include="Models\IListAnswer.cs" />
+    <Compile Include="Models\Product\ProductAddModel.cs" />
+    <Compile Include="Models\Product\ProductDetailAnswer.cs" />
     <Compile Include="Models\Product\ProductListAnswer.cs" />
     <Compile Include="Models\Product\ProductListModel.cs" />
+    <Compile Include="Models\Product\ProductUpdateModel.cs" />
     <Compile Include="Models\SimpleListItem.cs" />
     <Compile Include="Models\Material\MaterialAddModel.cs" />
     <Compile Include="Models\Material\MaterialDetailAnswer.cs" />

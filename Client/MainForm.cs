@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
-using Client.AddForms;
 using Client.Controls;
+using Client.DetailForms;
 using Client.ListForms;
 
 namespace Client
@@ -12,11 +12,12 @@ namespace Client
         public MainForm()
         {
             InitializeComponent();
-            addMaterialButtomMenu.Tag = new ButtonNavigation {FormType = typeof (MaterialAddForm)};
+            addMaterialButtomMenu.Tag = new ButtonNavigation {FormType = typeof (MaterialDetailForm), EntityId =  Guid.Empty};
             materialListButtomMenu.Tag = new ButtonNavigation {FormType = typeof (MaterialListForm)};
             detailButtonMenu.Tag = new ButtonNavigation {FormType = typeof (DetailListForm)};
-            addDetailButtonMenu.Tag = new ButtonNavigation {FormType = typeof (DetailAddForm)};
+            addDetailButtonMenu.Tag = new ButtonNavigation {FormType = typeof (DetailDetailForm), EntityId = Guid.Empty};
             productButtonMenu.Tag = new ButtonNavigation { FormType = typeof(ProductListForm) };
+            addProductButtonMenu.Tag = new ButtonNavigation { FormType = typeof(ProductDetailForm), EntityId = Guid.Empty };
         }
 
         public void OpenMdiChildForm(object sender, EventArgs e)

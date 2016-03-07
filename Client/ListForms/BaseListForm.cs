@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Runtime.Remoting.Messaging;
 using System.Windows.Forms;
 using Client.Controls;
 using Client.Extensions;
 
 namespace Client.ListForms
 {
-    public class BaseListForm : Form
+    public abstract class BaseListForm : Form
     {
         private readonly Type _detailFormType;
 
@@ -47,5 +46,7 @@ namespace Client.ListForms
                 }
             }
         }
+
+        public abstract void RebindGrid(object sender, EventArgs e);
     }
 }

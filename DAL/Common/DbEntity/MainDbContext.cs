@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using System.Data.Entity;
+using DAL.Common.DbInterface;
 using DAL.Entity;
 
 namespace DAL.Common.DbEntity

@@ -8,12 +8,8 @@ namespace DAL.Entity
     /// <summary>
     /// m2m связь деталь-изделие
     /// </summary>
-    public class DetailOfProduct :IEntity
+    public class DetailOfProduct
     {
-        /// <summary>
-        /// Идентификатор связи
-        /// </summary>
-        public Guid Id { get; set; }
 
         /// <summary>
         /// Идентификатор детали
@@ -45,7 +41,7 @@ namespace DAL.Entity
             public DetailOfProductConfiguration()
             {
                 ToTable("t_detail_product", "dbo");
-                Property(d => d.Id).HasColumnName("id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity).IsRequired();
+                HasKey(k => new {k.ProductId, k.DetailId});
                 Property(d => d.ProductId).HasColumnName("product_id").IsRequired();
                 Property(d => d.DetailId).HasColumnName("detail_id").IsRequired();
                 Property(d => d.DetailCount).HasColumnName("detail_count").IsRequired();

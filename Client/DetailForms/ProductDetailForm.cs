@@ -3,50 +3,50 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Core.Models;
-using Core.Models.Detail;
-using Core.Models.Material;
+using Core.Models.Product;
 using Core.OperationInterfaces;
 
 namespace Client.DetailForms
 {
-    public partial class DetailDetailForm : Form
+    public partial class ProductDetailForm : Form
     {
+        
         private readonly IDetailAction _detailAction;
-        private readonly IMaterialAction _materialAction;
+        private readonly IProductAction _productAction;
 
-        private readonly Guid _detailId;
-        private DetailDetailAnswer _detailParams;
+        private readonly Guid _productId;
+        private ProductDetailAnswer _detailParams;
         private bool _listDataWasChanged;
 
-        public DetailDetailForm(Guid id)
+        public ProductDetailForm(Guid id)
         {
-            _detailId = id;
+            _productId = id;
+            _productAction = Program.Resolve<IProductAction>();
             _detailAction = Program.Resolve<IDetailAction>();
-            _materialAction = Program.Resolve<IMaterialAction>();
             InitializeComponent();
             RebindData();
         }
 
         public void RebindData()
         {
-            if (!_detailId.Equals(Guid.Empty))
+            if (!_productId.Equals(Guid.Empty))
             {
-                _detailParams = Program.PerformCall((Guid)_detailId, _detailAction.GetDetail);
+                _detailParams = Program.PerformCall(_productId, _productAction.GetDetail);
                 detailNameTB.Text = _detailParams.Name;
-                Text = String.Format("Редактирование детали \"{0}\"", _detailParams.Name);
+                Text = String.Format("Редактирование изделия \"{0}\"", _detailParams.Name);
             }
             else
             {
-                Text = @"Добавление детали";
-                _detailParams = new DetailDetailAnswer
+                Text = @"Добавление изделия";
+                _detailParams = new ProductDetailAnswer
                 {
-                    Materials = new List<ContainObjectItem>()
+                    Details = new List<ContainObjectItem>()
                 };
             }
-            containListMaterial.ItemList = _detailParams.Materials;
-            containListMaterial.FullList = Program.PerformCall(_materialAction.GetSimpleList).ToList();
-            containListMaterial.DataChanged += DataWasChanged;
 
+            containListDetail.ItemList = _detailParams.Details;
+            containListDetail.FullList = Program.PerformCall(_detailAction.GetSimpleList).ToList();
+            containListDetail.DataChanged += DataWasChanged;
         }
 
         private void DataWasChanged(object sender, EventArgs e)
@@ -64,33 +64,33 @@ namespace Client.DetailForms
             Close();
         }
 
+        //todo и тут надо абстракцию сделать
         private void SaveEndExit(object sender, EventArgs e)
         {
             Guid newId;
-            if (!_detailId.Equals(Guid.Empty))
+            if (!_productId.Equals(Guid.Empty))
             {
-                newId = Program.PerformCall(new DetailUpdateModel
+                newId = Program.PerformCall(new ProductUpdateModel
                 {
                     Id = _detailParams.Id,
                     Name = detailNameTB.Text,
-                    Materials = _detailParams.Materials
-                }, _detailAction.Update);
+                    Details = _detailParams.Details
+                }, _productAction.Update);
             }
             else
             {
-                newId = Program.PerformCall(new DetailAddModel
+                newId = Program.PerformCall(new ProductAddModel
                 {
                     Name = detailNameTB.Text,
-                    Materials = _detailParams.Materials
-                }, _detailAction.Add);
+                    Details = _detailParams.Details
+                }, _productAction.Add);
             }
 
             if (newId == Guid.Empty)
                 return;
 
-            MessageBox.Show(@"Сохранение успешно завершено", String.Format("Деталь \"{0}\"", _detailParams.Name));
+            MessageBox.Show(@"Сохранение успешно завершено", String.Format("Деталь \"{0}\"", detailNameTB.Text));
             Close();
         }
-
     }
 }

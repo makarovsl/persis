@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using Core.OperationInterfaces;
 using Core.Operations;
 using DAL.Common.DbEntity;
+using DAL.Common.DbInterface;
 using DAL.Entity;
 using DAL.EntityDb;
 using Microsoft.Practices.Unity;
@@ -44,7 +45,7 @@ namespace Client
             #region entities
 
             _container.RegisterInstance(typeof(MaterialDb));
-            _container.RegisterType<IEntityDb<Material>, MaterialDb>();
+            _container.RegisterType<IRemovableEntityDb<Material>, MaterialDb>();
 
             _container.RegisterInstance(typeof(MaterialOperationDb));
             _container.RegisterType<IEntityDb<MaterialOperation>, MaterialOperationDb>();
@@ -56,10 +57,10 @@ namespace Client
             _container.RegisterType<IEntityDb<Product>, ProductDb>();
 
             _container.RegisterInstance(typeof(MaterialOfDetailDb));
-            _container.RegisterType<IEntityDb<MaterialOfDetail>, MaterialOfDetailDb>();
+            _container.RegisterType<IM2MEntityDb<MaterialOfDetail>, MaterialOfDetailDb>();
 
             _container.RegisterInstance(typeof(DetailOfProductDb));
-            _container.RegisterType<IEntityDb<DetailOfProduct>, DetailOfProductDb>();
+            _container.RegisterType<IM2MEntityDb<DetailOfProduct>, DetailOfProductDb>();
 
             #endregion
 
@@ -79,16 +80,16 @@ namespace Client
 
         public static T PerformCall<T, TP>(TP param, Func<TP, T> func)
         {
-            try
-            {
-                return func(param);
-            }
-            catch (Exception ex)
-            {
+             try
+             {
+                 return func(param);
+             }
+             catch (Exception ex)
+             {
 
-                MessageBox.Show(ex.InnerException.Message, @"Ошибка!");
-                return default(T);
-            }
+                 MessageBox.Show(ex.Message, @"Ошибка!");
+                 return default(T);
+             }
         }
 
         public static T PerformCall<T>(Func<T> func)
@@ -100,7 +101,7 @@ namespace Client
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.InnerException.Message, @"Ошибка!");
+                MessageBox.Show(ex.Message, @"Ошибка!");
                 return default(T);
             }
         }

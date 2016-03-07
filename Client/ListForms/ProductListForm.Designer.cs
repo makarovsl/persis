@@ -31,11 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.paginator = new Client.Controls.Paginator();
             this.productGridView = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.countDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.productListAnswerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.productGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productListAnswerBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -55,9 +55,9 @@
             this.productGridView.AutoGenerateColumns = false;
             this.productGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.productGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn,
-            this.nameDataGridViewTextBoxColumn,
-            this.countDataGridViewTextBoxColumn,
+            this.Id,
+            this.ColumnName,
+            this.ProductCount,
             this.Edit});
             this.productGridView.DataSource = this.productListAnswerBindingSource;
             this.productGridView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -69,39 +69,41 @@
             this.productGridView.Size = new System.Drawing.Size(748, 203);
             this.productGridView.TabIndex = 1;
             // 
-            // idDataGridViewTextBoxColumn
+            // productListAnswerBindingSource
             // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Visible = false;
+            this.productListAnswerBindingSource.DataSource = typeof(Core.Models.Product.ProductListAnswer);
             // 
-            // nameDataGridViewTextBoxColumn
+            // Id
             // 
-            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Наименование";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
             // 
-            // countDataGridViewTextBoxColumn
+            // ColumnName
             // 
-            this.countDataGridViewTextBoxColumn.DataPropertyName = "Count";
-            this.countDataGridViewTextBoxColumn.HeaderText = "Количество к производству";
-            this.countDataGridViewTextBoxColumn.Name = "countDataGridViewTextBoxColumn";
-            this.countDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ColumnName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnName.DataPropertyName = "Name";
+            this.ColumnName.HeaderText = "Наименование";
+            this.ColumnName.Name = "ColumnName";
+            this.ColumnName.ReadOnly = true;
+            // 
+            // ProductCount
+            // 
+            this.ProductCount.DataPropertyName = "Count";
+            this.ProductCount.HeaderText = "Количество к производству";
+            this.ProductCount.Name = "ProductCount";
+            this.ProductCount.ReadOnly = true;
             // 
             // Edit
             // 
             this.Edit.HeaderText = "";
-            this.Edit.Image = global::Client.Properties.Resources.delete_icon;
+            this.Edit.Image = global::Client.Properties.Resources.edit_icon;
+            this.Edit.MinimumWidth = 25;
             this.Edit.Name = "Edit";
             this.Edit.ReadOnly = true;
-            // 
-            // productListAnswerBindingSource
-            // 
-            this.productListAnswerBindingSource.DataSource = typeof(Core.Models.Product.ProductListAnswer);
+            this.Edit.Width = 25;
             // 
             // ProductListForm
             // 
@@ -124,8 +126,8 @@
         private System.Windows.Forms.DataGridView productGridView;
         private System.Windows.Forms.BindingSource productListAnswerBindingSource;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn countDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using Client.Controls;
 using Core.Models.Material;
 using Core.OperationInterfaces;
 
@@ -11,7 +10,7 @@ namespace Client.DetailForms
         private readonly IMaterialAction _materialAction;
         private readonly Guid _materialId;
         private MaterialDetailAnswer _materialParams;
-        private MaterialUpdateModel _updateModel;
+
         public MaterialDetailForm(Guid materialId)
         {
             _materialAction = Program.Resolve<IMaterialAction>();
@@ -22,15 +21,24 @@ namespace Client.DetailForms
 
         public void RebindData(object sender, EventArgs e)
         {
-            _materialParams = Program.PerformCall(_materialId, _materialAction.GetDetail);
-            if (_materialParams == null)
+            if (!_materialId.Equals(Guid.Empty))
             {
-                Close();
-                return;
+                _materialParams = Program.PerformCall(_materialId, _materialAction.GetDetail);
+                if (_materialParams == null)
+                {
+                    Close();
+                    return;
+                }
+                materialNameTB.Text = _materialParams.Name;
+                materialCountUpDown.Value = _materialParams.Count;
+                Text = String.Format("Редактирование материала : \"{0}\"", _materialParams.Name);
             }
-            materialNameTB.Text = _materialParams.Name;
-            materialCountUpDown.Value = _materialParams.Count;
-            Text = String.Format("Редактирование материала : \"{0}\"", _materialParams.Name);
+            else
+            {
+                _materialParams = new MaterialDetailAnswer();
+                Text = @"Добавление материала";
+            }
+
         }
         public void Exit(object sender, EventArgs e)
         {
@@ -44,19 +52,29 @@ namespace Client.DetailForms
 
         private void SaveEndExit(object sender, EventArgs e)
         {
-            _updateModel = new MaterialUpdateModel
+            Guid newId;
+            if (!_materialId.Equals(Guid.Empty))
             {
-                Id = _materialParams.Id,
-                Name = materialNameTB.Text,
-                Count = materialCountUpDown.Value
-            };
-
-            Guid newId = Program.PerformCall(_updateModel, _materialAction.UpdateMaterial);
-
+                newId = Program.PerformCall(new MaterialUpdateModel
+                {
+                    Id = _materialParams.Id,
+                    Name = materialNameTB.Text,
+                    Count = materialCountUpDown.Value
+                }, _materialAction.Update);
+            }
+            else
+            {
+                newId = Program.PerformCall(new MaterialAddModel
+                {
+                   Name = materialNameTB.Text,
+                   Count = materialCountUpDown.Value
+                }, _materialAction.Add);
+            }
             if (newId == Guid.Empty)
-                return;
+                    return;
+            
 
-            MessageBox.Show(@"Сохранение успешно завершено", String.Format("Материал \"{0}\"", _materialParams.Name));
+            MessageBox.Show(@"Сохранение успешно завершено", String.Format("Материал \"{0}\"", materialNameTB.Text));
             Close();
         }
 

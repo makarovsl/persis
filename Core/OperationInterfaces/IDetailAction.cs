@@ -1,4 +1,5 @@
 ﻿using System;
+using Core.Models;
 using Core.Models.Detail;
 
 namespace Core.OperationInterfaces
@@ -7,7 +8,10 @@ namespace Core.OperationInterfaces
     {
         int GetListCount();
         DetailListAnswer[] GetList(DetailListModel listModel);
+        SimpleListItem[] GetSimpleList();
         DetailDetailAnswer GetDetail(Guid id);
-        Guid UpdateDetail(DetailUpdateModel updateModel);
+        Guid Update(DetailUpdateModel updateModel);
+        Guid Add(DetailAddModel addModel);
+        void Delete(Guid id);
     }
 }

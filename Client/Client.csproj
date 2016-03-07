@@ -71,18 +71,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddForms\DetailAddForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddForms\DetailAddForm.Designer.cs">
-      <DependentUpon>DetailAddForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AddForms\MaterialAddForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddForms\MaterialAddForm.Designer.cs">
-      <DependentUpon>MaterialAddForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ButtonNavigation.cs" />
     <Compile Include="Controls\ContainList.cs">
       <SubType>UserControl</SubType>
@@ -107,6 +95,12 @@
     </Compile>
     <Compile Include="DetailForms\MaterialDetailForm.Designer.cs">
       <DependentUpon>MaterialDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DetailForms\ProductDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetailForms\ProductDetailForm.Designer.cs">
+      <DependentUpon>ProductDetailForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions\DataGridViewRowExtension.cs" />
     <Compile Include="ListForms\BaseListForm.cs">
@@ -138,9 +132,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AddForms\MaterialAddForm.resx">
-      <DependentUpon>MaterialAddForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ContainList.resx">
       <DependentUpon>ContainList.cs</DependentUpon>
     </EmbeddedResource>
@@ -152,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DetailForms\MaterialDetailForm.resx">
       <DependentUpon>MaterialDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DetailForms\ProductDetailForm.resx">
+      <DependentUpon>ProductDetailForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListForms\DetailListForm.resx">
       <DependentUpon>DetailListForm.cs</DependentUpon>

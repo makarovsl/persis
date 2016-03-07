@@ -10,11 +10,12 @@ namespace Core.OperationInterfaces
     /// </summary>
     public interface IMaterialAction
     {
-        Guid AddMaterial(MaterialAddModel addModel);
+        Guid Add(MaterialAddModel addModel);
         int GetListCount();
         MaterialListAnswer[] GetList(MaterialListModel listModel);
         SimpleListItem[] GetSimpleList();
         MaterialDetailAnswer GetDetail(Guid id);
-        Guid UpdateMaterial(MaterialUpdateModel updateModel);
+        Guid Update(MaterialUpdateModel updateModel);
+        void Delete(Guid id);
     }
 }

@@ -50,11 +50,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\DbEntity\EntityDb.cs" />
-    <Compile Include="Common\DbEntity\IDbContext.cs" />
-    <Compile Include="Common\DbEntity\IEntityDb.cs" />
-    <Compile Include="Common\DbEntity\IRemovableEntityDb.cs" />
+    <Compile Include="Common\DbEntity\IM2MEntityDb.cs" />
     <Compile Include="Common\DbEntity\MainDbContext.cs" />
     <Compile Include="Common\DbEntity\RemovableEntityDb.cs" />
+    <Compile Include="Common\DbInterface\IDbContext.cs" />
+    <Compile Include="Common\DbInterface\IEntityDb.cs" />
+    <Compile Include="Common\DbInterface\IRemovableEntityDb.cs" />
+    <Compile Include="Common\DbInterface\M2MEntityDb.cs" />
     <Compile Include="Common\Entity\IEntity.cs" />
     <Compile Include="Common\Entity\IRemovableEntity.cs" />
     <Compile Include="EntityDb\DetailDb.cs" />

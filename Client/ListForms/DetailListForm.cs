@@ -19,9 +19,8 @@ namespace Client.ListForms
             detailGridView.CellClick += CellClick;
         }
 
-        private void RebindGrid(object sender, EventArgs e)
+        public override void RebindGrid(object sender, EventArgs e)
         {
-
 
             detailGridView.DataSource = Program.PerformCall(
                 new DetailListModel { PageSize = paginator.PageSize, PageNumber = paginator.CurrenPage },

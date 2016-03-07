@@ -8,12 +8,8 @@ namespace DAL.Entity
     /// <summary>
     /// m2m связь деталь-материал
     /// </summary>
-    public class MaterialOfDetail : IEntity
+    public class MaterialOfDetail 
     {
-        /// <summary>
-        /// Идентификатор связи
-        /// </summary>
-        public Guid Id { get; set; }
 
         /// <summary>
         /// Идентификатор материала
@@ -45,7 +41,7 @@ namespace DAL.Entity
             public MaterialOfDetailConfiguration()
             {
                 ToTable("t_material_detail", "dbo");
-                Property(d => d.Id).HasColumnName("id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity).IsRequired();
+                HasKey(k => new {k.MaterialId, k.DetailId});
                 Property(d => d.MaterialId).HasColumnName("material_id").IsRequired();
                 Property(d => d.DetailId).HasColumnName("detail_id").IsRequired();
                 Property(d => d.MaterialCount).HasColumnName("material_count").IsRequired();

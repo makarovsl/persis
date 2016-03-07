@@ -1,5 +1,4 @@
-﻿using Client.AddForms;
-using Client.ListForms;
+﻿using Client.ListForms;
 
 namespace Client
 {
@@ -41,6 +40,7 @@ namespace Client
             this.addDetailButtonMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.изделияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productButtonMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.addProductButtonMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -112,7 +112,8 @@ namespace Client
             // изделияToolStripMenuItem
             // 
             this.изделияToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.productButtonMenu});
+            this.productButtonMenu,
+            this.addProductButtonMenu});
             this.изделияToolStripMenuItem.Name = "изделияToolStripMenuItem";
             this.изделияToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.изделияToolStripMenuItem.Text = "Изделия";
@@ -120,8 +121,16 @@ namespace Client
             // productButtonMenu
             // 
             this.productButtonMenu.Name = "productButtonMenu";
-            this.productButtonMenu.Size = new System.Drawing.Size(163, 22);
+            this.productButtonMenu.Size = new System.Drawing.Size(173, 22);
             this.productButtonMenu.Text = "Список изделий";
+            this.productButtonMenu.Click += new System.EventHandler(this.OpenMdiChildForm);
+            // 
+            // addProductButtonMenu
+            // 
+            this.addProductButtonMenu.Name = "addProductButtonMenu";
+            this.addProductButtonMenu.Size = new System.Drawing.Size(173, 22);
+            this.addProductButtonMenu.Text = "Добавить изделие";
+            this.addProductButtonMenu.Click += new System.EventHandler(this.OpenMdiChildForm);
             // 
             // MainForm
             // 
@@ -152,5 +161,6 @@ namespace Client
         private System.Windows.Forms.ToolStripMenuItem addDetailButtonMenu;
         private System.Windows.Forms.ToolStripMenuItem изделияToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem productButtonMenu;
+        private System.Windows.Forms.ToolStripMenuItem addProductButtonMenu;
     }
 }

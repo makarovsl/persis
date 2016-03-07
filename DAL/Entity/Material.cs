@@ -10,7 +10,7 @@ namespace DAL.Entity
     /// <summary>
     /// Класс-сущность "Материалы"
     /// </summary>
-    public class Material : IEntity
+    public class Material : IRemovableEntity
     {
         /// <summary>
         /// Идентификатор материала
@@ -21,6 +21,11 @@ namespace DAL.Entity
         /// Наименование материала
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Признак логического удаления
+        /// </summary>
+        public bool IsDeleted { get; set; }
 
         /// <summary>
         /// Операции над материалом, не null только при применении инклуд методов
@@ -37,6 +42,7 @@ namespace DAL.Entity
                 ToTable("td_material", "dbo");
                 Property(d => d.Id).HasColumnName("id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity).IsRequired();
                 Property(d => d.Name).HasColumnName("name").IsUnicode(false).IsRequired();
+                Property(d => d.IsDeleted).HasColumnName("is_deleted").IsRequired();
                 HasMany(p => p.MaterialOperations).WithRequired().HasForeignKey(p => p.MaterialId);
             }
         }

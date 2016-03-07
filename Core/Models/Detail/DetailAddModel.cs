@@ -6,15 +6,11 @@ using DAL.Entity;
 namespace Core.Models.Detail
 {
     /// <summary>
-    /// Класс модель для обновления данных детали
+    /// Модель для добавления детали
     /// </summary>
-    public class DetailUpdateModel
+    public class DetailAddModel
     {
-        /// <summary>
-        /// Идентификатор детали
-        /// </summary>
-        public Guid Id { get; set; }
-
+   
         /// <summary>
         /// Наименование детали
         /// </summary>
@@ -25,17 +21,25 @@ namespace Core.Models.Detail
         /// </summary>
         public List<ContainObjectItem> Materials;
 
+        /// <summary>
+        /// Получение сущности "Деталь" из модели
+        /// </summary>
+        /// <returns></returns>
         public DAL.Entity.Detail GetEntity()
         {
             return new DAL.Entity.Detail
             {
-                Id = Id,
                 Name = Name,
                 IsDeleted = false
             };
         }
 
-        public List<MaterialOfDetail> GetMaterialOfDetailEntity()
+        /// <summary>
+        /// Получение сущности "Материалы в составе детали" из модели
+        /// </summary>
+        /// <param name="detailId">Идентфикатор детали</param>
+        /// <returns></returns>
+        public List<MaterialOfDetail> GetMaterialOfDetailEntity(Guid detailId)
         {
             return
                 Materials.Where(w => w.Id != null)
@@ -44,8 +48,8 @@ namespace Core.Models.Detail
                         s =>
                             new MaterialOfDetail
                             {
-                                DetailId = Id,
-                                MaterialId = s.Key??Guid.Empty,
+                                DetailId = detailId,
+                                MaterialId = s.Key ?? Guid.Empty,
                                 MaterialCount = s.Sum(su => su.Count)
                             })
                     .ToList();

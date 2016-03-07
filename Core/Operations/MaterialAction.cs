@@ -5,20 +5,24 @@ using Core.Models;
 using Core.Models.Material;
 using Core.OperationInterfaces;
 using DAL.Common.DbEntity;
+using DAL.Common.DbInterface;
 using DAL.Entity;
 
 namespace Core.Operations
 {
     public class MaterialAction : IMaterialAction
     {
-        private readonly IEntityDb<Material> _material;
+        private readonly IRemovableEntityDb<Material> _material;
+        private readonly IM2MEntityDb<MaterialOfDetail> _materialOfDetails;
         private readonly IEntityDb<MaterialOperation> _materialOperation;
 
-        public MaterialAction(IEntityDb<Material> material,
+        public MaterialAction(IRemovableEntityDb<Material> material,
+                              IM2MEntityDb<MaterialOfDetail> materialOfDetails,
                               IEntityDb<MaterialOperation> materialOperation)
         {
             _material = material;
             _materialOperation = materialOperation;
+            _materialOfDetails = materialOfDetails;
         }
 
         /// <summary>
@@ -26,7 +30,7 @@ namespace Core.Operations
         /// </summary>
         /// <param name="addModel">Входящая модель</param>
         /// <returns>Идентификатор созданного материала</returns>
-        public Guid AddMaterial(MaterialAddModel addModel)
+        public Guid Add(MaterialAddModel addModel)
         {
             if (String.IsNullOrEmpty(addModel.Name))
                 throw new Exception("Наименование не должно быть пустым");
@@ -42,7 +46,7 @@ namespace Core.Operations
             {
                 newId = _material.Insert(addModel.GetEntity());
                 if ((addModel.Count ?? 0) != 0)
-                        _materialOperation.Insert(new MaterialOperation {MaterialId = newId, Count = addModel.Count??0});
+                    _materialOperation.Insert(new MaterialOperation { MaterialId = newId, Count = addModel.Count ?? 0 });
                 transaction.Complete();
             }
             return newId;
@@ -131,7 +135,7 @@ namespace Core.Operations
         /// </summary>
         /// <param name="updateModel">Модель с обновленными данными</param>
         /// <returns>Идентификатор объекта</returns>
-        public Guid UpdateMaterial(MaterialUpdateModel updateModel)
+        public Guid Update(MaterialUpdateModel updateModel)
         {
             if (updateModel.Id.Equals(Guid.Empty))
                 throw new Exception("Не заполнен идентификатор");
@@ -145,7 +149,7 @@ namespace Core.Operations
                                          .Where(w => w.MaterialId.Equals(updateModel.Id))
                                          .DefaultIfEmpty()
                                          .Sum(su => su == null ? 0 : su.Count);
-                
+
                 _material.Update(updateModel.GetEntity());
                 if (operationCount != 0)
                     _materialOperation.Insert(new MaterialOperation
@@ -159,7 +163,20 @@ namespace Core.Operations
             return updateModel.Id;
         }
 
+        public void Delete(Guid id)
+        {
+            using (var transaction = new TransactionScope())
+            {
+                if (_materialOfDetails.GetCollection().Any(a => a.MaterialId.Equals(id)))
+                {
+                    transaction.Dispose();
+                    throw new Exception("Материал используется в деталях");
+                }
 
+                _material.Delete(id);
 
+                transaction.Complete();
+            }
+        }
     }
 }

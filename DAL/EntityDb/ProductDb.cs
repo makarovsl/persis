@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using DAL.Common.DbEntity;
+using DAL.Common.DbInterface;
 using DAL.Entity;
 
 namespace DAL.EntityDb
