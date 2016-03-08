@@ -52,6 +52,9 @@
     <Compile Include="Models\Detail\DetailListModel.cs" />
     <Compile Include="Models\Detail\DetailUpdateModel.cs" />
     <Compile Include="Models\IAnswerModel.cs" />
+    <Compile Include="Models\Material\MaterialWithCount.cs" />
+    <Compile Include="Models\Product\MaterialOfProduct.cs" />
+    <Compile Include="Models\Product\ProduceModel.cs" />
     <Compile Include="Models\Product\ProductAddModel.cs" />
     <Compile Include="Models\Product\ProductDetailAnswer.cs" />
     <Compile Include="Models\Product\ProductListAnswer.cs" />

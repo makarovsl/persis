@@ -35,7 +35,10 @@
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ColumnEdit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ColumnDelete = new System.Windows.Forms.DataGridViewImageColumn();
+            ColumnProduce = new System.Windows.Forms.DataGridViewImageColumn();
+
             ((System.ComponentModel.ISupportInitialize)(this.productGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productListAnswerBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -58,7 +61,9 @@
             this.Id,
             this.ColumnName,
             this.ProductCount,
-            this.Edit});
+            ColumnProduce,
+            this.ColumnEdit,
+            this.ColumnDelete});
             this.productGridView.DataSource = this.productListAnswerBindingSource;
             this.productGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.productGridView.Location = new System.Drawing.Point(0, 0);
@@ -95,15 +100,35 @@
             this.ProductCount.HeaderText = "Количество к производству";
             this.ProductCount.Name = "ProductCount";
             this.ProductCount.ReadOnly = true;
+            //
+            //Produce
+            //
+            ColumnProduce.HeaderText = "";
+            ColumnProduce.Image = Properties.Resources.create_icon;
+            ColumnProduce.Name = "ColumnProduce";
+            ColumnProduce.ReadOnly = true;
+            ColumnProduce.MinimumWidth = 20;
+            ColumnProduce.Width = 20;
+
+
             // 
             // Edit
             // 
-            this.Edit.HeaderText = "";
-            this.Edit.Image = global::Client.Properties.Resources.edit_icon;
-            this.Edit.MinimumWidth = 25;
-            this.Edit.Name = "Edit";
-            this.Edit.ReadOnly = true;
-            this.Edit.Width = 25;
+            this.ColumnEdit.HeaderText = "";
+            this.ColumnEdit.Image = global::Client.Properties.Resources.edit_icon;
+            this.ColumnEdit.MinimumWidth = 25;
+            this.ColumnEdit.Name = "ColumnEdit";
+            this.ColumnEdit.ReadOnly = true;
+            this.ColumnEdit.Width = 25;
+            // 
+            // Delete
+            // 
+            this.ColumnDelete.HeaderText = "";
+            this.ColumnDelete.Image = global::Client.Properties.Resources.delete_icon;
+            this.ColumnDelete.Name = "ColumnDelete";
+            this.ColumnDelete.ReadOnly = true;
+            ColumnDelete.MinimumWidth = 20;
+            ColumnDelete.Width = 20;
             // 
             // ProductListForm
             // 
@@ -125,7 +150,9 @@
         private Controls.Paginator paginator;
         private System.Windows.Forms.DataGridView productGridView;
         private System.Windows.Forms.BindingSource productListAnswerBindingSource;
-        private System.Windows.Forms.DataGridViewImageColumn Edit;
+        private System.Windows.Forms.DataGridViewImageColumn ColumnDelete;
+        private System.Windows.Forms.DataGridViewImageColumn ColumnEdit;
+        private System.Windows.Forms.DataGridViewImageColumn ColumnProduce;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;

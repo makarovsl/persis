@@ -1,4 +1,5 @@
 ﻿using System;
+using Client.ListForms;
 using Core.Models.Material;
 using Core.OperationInterfaces;
 
@@ -17,7 +18,6 @@ namespace Client.DetailForms
 
             buttonCancel.Click += Exit;
             buttonOk.Click += SaveEndExit;
-
             RebindData();
         }
 
@@ -31,12 +31,20 @@ namespace Client.DetailForms
 
         protected override void BindData(MaterialAddModel model)
         {
+            Text = @"Добавления материала";
             Bind(model);
         }
 
         protected override void BindData(MaterialUpdateModel model)
         {
+            Text = String.Format("Редактирование материала \"{0}\"", model.Name);
             Bind(model);
+        }
+
+        protected override void AfterSave()
+        {
+            ((MainForm)MdiParent).RebindListData(typeof(ProductListForm));
+            ((MainForm)MdiParent).RebindListData(typeof(MaterialListForm));
         }
     }
 }

@@ -31,10 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.paginator = new Client.Controls.Paginator();
             this.detailGridView = new System.Windows.Forms.DataGridView();
+            this.detailListAnswerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
-            this.detailListAnswerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ColumnEdit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ColumnDelete = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.detailGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.detailListAnswerBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -57,7 +58,8 @@
             this.detailGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.nameDataGridViewTextBoxColumn,
-            this.Edit});
+            this.ColumnEdit,
+            this.ColumnDelete});
             this.detailGridView.DataSource = this.detailListAnswerBindingSource;
             this.detailGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.detailGridView.Location = new System.Drawing.Point(0, 0);
@@ -67,6 +69,10 @@
             this.detailGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.detailGridView.Size = new System.Drawing.Size(760, 228);
             this.detailGridView.TabIndex = 1;
+            // 
+            // detailListAnswerBindingSource
+            // 
+            this.detailListAnswerBindingSource.DataSource = typeof(Core.Models.Detail.DetailListAnswer);
             // 
             // Id
             // 
@@ -86,16 +92,21 @@
             // 
             // Edit
             // 
-            this.Edit.HeaderText = "";
-            this.Edit.Image = global::Client.Properties.Resources.edit_icon;
-            this.Edit.MinimumWidth = 20;
-            this.Edit.Name = "Edit";
-            this.Edit.ReadOnly = true;
-            this.Edit.Width = 20;
+            this.ColumnEdit.HeaderText = "";
+            this.ColumnEdit.Image = global::Client.Properties.Resources.edit_icon;
+            this.ColumnEdit.MinimumWidth = 20;
+            this.ColumnEdit.Name = "ColumnEdit";
+            this.ColumnEdit.ReadOnly = true;
+            this.ColumnEdit.Width = 20;
             // 
-            // detailListAnswerBindingSource
+            // Delete
             // 
-            this.detailListAnswerBindingSource.DataSource = typeof(Core.Models.Detail.DetailListAnswer);
+            this.ColumnDelete.HeaderText = "";
+            this.ColumnDelete.Image = global::Client.Properties.Resources.delete_icon;
+            this.ColumnDelete.Name = "ColumnDelete";
+            this.ColumnDelete.ReadOnly = true;
+            ColumnDelete.MinimumWidth = 20;
+            ColumnDelete.Width = 20;
             // 
             // DetailListForm
             // 
@@ -117,8 +128,9 @@
         private Controls.Paginator paginator;
         private System.Windows.Forms.BindingSource detailListAnswerBindingSource;
         private System.Windows.Forms.DataGridView detailGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewImageColumn Edit;
+        private System.Windows.Forms.DataGridViewImageColumn ColumnDelete;
+        private System.Windows.Forms.DataGridViewImageColumn ColumnEdit;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
     }
 }

@@ -69,19 +69,14 @@ namespace Core.Operations
             if (listModel.PageNumber <= 0 || listModel.PageSize <= 0)
                 return new MaterialListAnswer[0];
 
-            return _material.GetIncludedCollection()
-                .GroupBy(g => new { g.Name, g.Id })
-                .Select(
-                    s =>
-                        new MaterialListAnswer
-                        {
-                            Id = s.Key.Id,
-                            Name = s.Key.Name,
-                            Count =
-                                s.Sum(
-                                    su => su.MaterialOperations.Any() ? su.MaterialOperations.Sum(q => q.Count) : 0)
-                        }).OrderBy(o => new { o.Name, o.Id })
-                .Skip((listModel.PageNumber - 1) * listModel.PageSize)
+            return GetMaterialQuery().Select(s => new MaterialListAnswer
+                                                        {
+                                                            Id = s.Id,
+                                                            Name = s.Name,
+                                                            Count = s.Count
+                                                        })
+                .OrderBy(o => new {o.Name, o.Id})
+                .Skip((listModel.PageNumber - 1)*listModel.PageSize)
                 .Take(listModel.PageSize)
                 .ToArray();
         }
@@ -106,25 +101,12 @@ namespace Core.Operations
         /// <returns>Модель представления деталей материала</returns>
         public MaterialDetailAnswer GetDetail(Guid id)
         {
-            var entity =
-                 _material.GetIncludedCollection()
-                     .Where(w => w.Id == id)
-                     .GroupBy(g => new { g.Id, g.Name })
-                     .Select(
-                         s =>
-                             new MaterialDetailAnswer
-                             {
-                                 Id = s.Key.Id,
-                                 Name = s.Key.Name,
-                                 Count =
-                                     s.Sum(
-                                         su => su.MaterialOperations.Any() ? su.MaterialOperations.Sum(q => q.Count) : 0)
-                             }).SingleOrDefault();
+            var entity = GetMaterialQuery().SingleOrDefault(s=>s.Id.Equals(id));
 
             if (entity == null)
                 throw new Exception("Материал не найден");
 
-            return entity;
+            return entity.GetDetailModel();
 
         }
 
@@ -161,6 +143,34 @@ namespace Core.Operations
             return updateModel.Id;
         }
 
+        /// <summary>
+        /// Получение запроса по остаткам материалов
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<MaterialWithCount> GetMaterialQuery()
+        {
+            return _material.GetIncludedCollection()
+                .GroupBy(g => new
+                {
+                    g.Id,
+                    g.Name
+                })
+                .Select(
+                    s =>
+                        new MaterialWithCount
+                        {
+                            Id = s.Key.Id,
+                            Name = s.Key.Name,
+                            Count =
+                                s.Sum(
+                                    su => su.MaterialOperations.Any() ? su.MaterialOperations.Sum(q => q.Count) : 0)
+                        });
+        }
+
+        /// <summary>
+        /// Удаление материала
+        /// </summary>
+        /// <param name="id"></param>
         public void Delete(Guid id)
         {
             using (var transaction = new TransactionScope())
@@ -172,9 +182,24 @@ namespace Core.Operations
                 }
 
                 _material.Delete(id);
-
                 transaction.Complete();
             }
         }
+
+        /// <summary>
+        /// Уменьшение количества материалов. Внимание! Работает не в транзакции!
+        /// </summary>
+        /// <param name="materialId">Идентифкатор материала</param>
+        /// <param name="countDecrease">Количество для уменьшение</param>
+        public void DecreaseCount(Guid materialId, decimal countDecrease)
+        {
+            _materialOperation.Insert(new MaterialOperation
+            {
+                MaterialId = materialId,
+                Count = countDecrease * -1
+            });
+        }
+
+       
     }
 }

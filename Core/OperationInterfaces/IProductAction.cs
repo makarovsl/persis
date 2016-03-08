@@ -8,5 +8,6 @@ namespace Core.OperationInterfaces
         int GetListCount();
         ProductListAnswer[] GetList(ProductListModel listModel);
         void Delete(Guid id);
+        bool Produce(ProduceModel produceModel);
     }
 }

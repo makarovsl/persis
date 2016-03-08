@@ -71,7 +71,9 @@ namespace Client.DetailForms
                 return;
 
             MessageBox.Show(@"Сохранение успешно завершено");
+            AfterSave();
             Close();
+            
         }
 
         protected void Exit(object sender, EventArgs e)
@@ -86,6 +88,8 @@ namespace Client.DetailForms
 
         protected abstract void BindData(TModelAdd model);
         protected abstract void BindData(TModelUpdate model);
+
+        protected abstract void AfterSave();
 
     }
 }

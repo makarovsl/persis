@@ -12,10 +12,10 @@ namespace Client
         public MainForm()
         {
             InitializeComponent();
-            addMaterialButtomMenu.Tag = new ButtonNavigation {FormType = typeof (MaterialDetailForm), EntityId =  Guid.Empty};
-            materialListButtomMenu.Tag = new ButtonNavigation {FormType = typeof (MaterialListForm)};
-            detailButtonMenu.Tag = new ButtonNavigation {FormType = typeof (DetailListForm)};
-            addDetailButtonMenu.Tag = new ButtonNavigation {FormType = typeof (DetailDetailForm), EntityId = Guid.Empty};
+            addMaterialButtomMenu.Tag = new ButtonNavigation { FormType = typeof(MaterialDetailForm), EntityId = Guid.Empty };
+            materialListButtomMenu.Tag = new ButtonNavigation { FormType = typeof(MaterialListForm) };
+            detailButtonMenu.Tag = new ButtonNavigation { FormType = typeof(DetailListForm) };
+            addDetailButtonMenu.Tag = new ButtonNavigation { FormType = typeof(DetailDetailForm), EntityId = Guid.Empty };
             productButtonMenu.Tag = new ButtonNavigation { FormType = typeof(ProductListForm) };
             addProductButtonMenu.Tag = new ButtonNavigation { FormType = typeof(ProductDetailForm), EntityId = Guid.Empty };
         }
@@ -25,7 +25,7 @@ namespace Client
             ButtonNavigation buttonTag = null;
 
             if (sender is ToolStripItem)
-                buttonTag =  ((ToolStripItem) sender).Tag as ButtonNavigation;
+                buttonTag = ((ToolStripItem)sender).Tag as ButtonNavigation;
 
 
             if (sender is DataGridViewImageCell)
@@ -35,7 +35,7 @@ namespace Client
                 return;
 
             CreateNewChilForm(buttonTag);
-           
+
         }
 
         public void CreateNewChilForm(ButtonNavigation navigation)
@@ -72,6 +72,19 @@ namespace Client
             form.MdiParent = this;
             form.WindowState = FormWindowState.Maximized;
             form.Show();
+        }
+
+        public void RebindListData(Type listFormType)
+        {
+            if (!listFormType.IsSubclassOf(typeof(BaseListForm)))
+                return;
+
+            var form =
+                        MdiChildren.SingleOrDefault(
+                            s => ((ButtonNavigation)s.Tag).FormType == listFormType);
+
+            var baseListForm = (BaseListForm)form;
+            baseListForm?.RebindGrid();
         }
 
 

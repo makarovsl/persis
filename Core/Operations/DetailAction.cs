@@ -151,6 +151,10 @@ namespace Core.Operations
             return newId;
         }
 
+        /// <summary>
+        /// Удаление детали
+        /// </summary>
+        /// <param name="id">Идентификатор детали</param>
         public void Delete(Guid id)
         {
             using (var transaction = new TransactionScope())

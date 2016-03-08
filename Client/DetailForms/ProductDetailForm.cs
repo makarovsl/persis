@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Client.ListForms;
 using Core.Models;
 using Core.Models.Product;
 using Core.OperationInterfaces;
@@ -32,14 +33,21 @@ namespace Client.DetailForms
 
         protected override void BindData (ProductAddModel model)
         {
+            Text = @"Добавления изделия";
             containListDetail.ItemList = model.Details;
             Bind(model);
         }
 
         protected override void BindData(ProductUpdateModel model)
         {
+            Text = String.Format("Редактирование изделия \"{0}\"", model.Name);
             containListDetail.ItemList = model.Details;
             Bind(model);
+        }
+
+        protected override void AfterSave()
+        {
+            ((MainForm)MdiParent).RebindListData(typeof(ProductListForm));
         }
 
         private void Bind<T>(T model)

@@ -35,7 +35,8 @@
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.countDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ColumnEdit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ColumnDelete = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.materialGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.materialListAnswerBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -51,7 +52,8 @@
             this.Id,
             this.nameDataGridViewTextBoxColumn,
             this.countDataGridViewTextBoxColumn,
-            this.Edit});
+            this.ColumnEdit,
+            this.ColumnDelete});
             this.materialGridView.DataSource = this.materialListAnswerBindingSource;
             this.materialGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.materialGridView.Location = new System.Drawing.Point(0, 0);
@@ -101,12 +103,21 @@
             // 
             // Edit
             // 
-            this.Edit.HeaderText = "";
-            this.Edit.Image = global::Client.Properties.Resources.edit_icon;
-            this.Edit.MinimumWidth = 25;
-            this.Edit.Name = "Edit";
-            this.Edit.ReadOnly = true;
-            this.Edit.Width = 25;
+            this.ColumnEdit.HeaderText = "";
+            this.ColumnEdit.Image = global::Client.Properties.Resources.edit_icon;
+            this.ColumnEdit.MinimumWidth = 25;
+            this.ColumnEdit.Name = "ColumnEdit";
+            this.ColumnEdit.ReadOnly = true;
+            this.ColumnEdit.Width = 25;
+            // 
+            // Delete
+            // 
+            this.ColumnDelete.HeaderText = "";
+            this.ColumnDelete.Image = global::Client.Properties.Resources.delete_icon;
+            this.ColumnDelete.Name = "ColumnDelete";
+            this.ColumnDelete.ReadOnly = true;
+            ColumnDelete.MinimumWidth = 20;
+            ColumnDelete.Width = 20;
             // 
             // MaterialListForm
             // 
@@ -127,9 +138,10 @@
         private System.Windows.Forms.BindingSource materialListAnswerBindingSource;
         private System.Windows.Forms.DataGridView materialGridView;
         private Controls.Paginator paginator;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewImageColumn Edit;
+        private System.Windows.Forms.DataGridViewImageColumn ColumnDelete;
+        private System.Windows.Forms.DataGridViewImageColumn ColumnEdit;
         private System.Windows.Forms.DataGridViewTextBoxColumn countDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
     }
 }
