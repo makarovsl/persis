@@ -6,7 +6,7 @@ namespace Core.Models.Material
     /// <summary>
     /// Модель-ответ деталей материала
     /// </summary>
-    public class MaterialDetailAnswer
+    public class MaterialDetailAnswer : IAnswerModel<MaterialUpdateModel>
     {
         /// <summary>
         /// Идентификатор материала
@@ -22,6 +22,14 @@ namespace Core.Models.Material
         /// Количество материала
         /// </summary>
         public decimal Count { get; set; }
-
+        public MaterialUpdateModel GetUpdateModel()
+        {
+            return new MaterialUpdateModel
+            {
+                Id = Id,
+                Name = Name,
+                Count = Count
+            };
+        }
     }
 }

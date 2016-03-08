@@ -6,7 +6,7 @@ namespace Core.Models.Product
     /// <summary>
     /// Ответ деталей изделия
     /// </summary>
-    public class ProductDetailAnswer
+    public class ProductDetailAnswer : IAnswerModel<ProductUpdateModel>
     {
         /// <summary>
         /// Идентификатор изделия
@@ -22,5 +22,15 @@ namespace Core.Models.Product
         /// Список выбранных деталей
         /// </summary>
         public List<ContainObjectItem> Details;
+
+        public ProductUpdateModel GetUpdateModel()
+        {
+            return new ProductUpdateModel
+            {
+                Id = Id,
+                Name = Name,
+                Details = Details
+            };
+        }
     }
 }

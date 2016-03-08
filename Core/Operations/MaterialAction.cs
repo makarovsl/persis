@@ -35,18 +35,16 @@ namespace Core.Operations
             if (String.IsNullOrEmpty(addModel.Name))
                 throw new Exception("Наименование не должно быть пустым");
 
-            if (addModel.Count != null)
-            {
-                if (addModel.Count.Value < 0 || addModel.Count.Value > 999999999)
+            if (addModel.Count < 0 || addModel.Count > 999999999)
                     throw new Exception("Количество должно быть в интервале 0 - 999999999");
-            }
+            
 
             Guid newId;
             using (var transaction = new TransactionScope())
             {
                 newId = _material.Insert(addModel.GetEntity());
-                if ((addModel.Count ?? 0) != 0)
-                    _materialOperation.Insert(new MaterialOperation { MaterialId = newId, Count = addModel.Count ?? 0 });
+                if ((addModel.Count) != 0)
+                    _materialOperation.Insert(new MaterialOperation { MaterialId = newId, Count = addModel.Count});
                 transaction.Complete();
             }
             return newId;

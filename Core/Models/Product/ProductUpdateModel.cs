@@ -25,6 +25,7 @@ namespace Core.Models.Product
         /// </summary>
         public List<ContainObjectItem> Details;
 
+
         public DAL.Entity.Product GetEntity()
         {
             return new DAL.Entity.Product

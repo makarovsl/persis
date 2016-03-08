@@ -19,7 +19,7 @@ namespace Client.ListForms
             detailGridView.CellClick += CellClick;
         }
 
-        public override void RebindGrid(object sender, EventArgs e)
+        public void RebindGrid(object sender, EventArgs e)
         {
 
             detailGridView.DataSource = Program.PerformCall(

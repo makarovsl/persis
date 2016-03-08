@@ -6,7 +6,7 @@ namespace Core.Models.Detail
     /// <summary>
     /// Модель-ответ деталей сущности "Деталь"
     /// </summary>
-    public class DetailDetailAnswer
+    public class DetailDetailAnswer: IAnswerModel<DetailUpdateModel>
     {
         /// <summary>
         /// Идентификатор детали
@@ -23,5 +23,14 @@ namespace Core.Models.Detail
         /// </summary>
         public List<ContainObjectItem> Materials;
 
+        public DetailUpdateModel GetUpdateModel()
+        {
+            return new DetailUpdateModel
+            {
+                Id = Id,
+                Name = Name,
+                Materials = Materials
+            };
+        }
     }
 }

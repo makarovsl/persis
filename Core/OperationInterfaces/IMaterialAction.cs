@@ -8,14 +8,11 @@ namespace Core.OperationInterfaces
     /// <summary>
     /// Интерфейс операций с материалами
     /// </summary>
-    public interface IMaterialAction
+    public interface IMaterialAction : ISaveAction<MaterialUpdateModel, MaterialAddModel, MaterialDetailAnswer>
     {
-        Guid Add(MaterialAddModel addModel);
         int GetListCount();
         MaterialListAnswer[] GetList(MaterialListModel listModel);
         SimpleListItem[] GetSimpleList();
-        MaterialDetailAnswer GetDetail(Guid id);
-        Guid Update(MaterialUpdateModel updateModel);
         void Delete(Guid id);
     }
 }

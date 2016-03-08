@@ -13,7 +13,7 @@
         /// <summary>
         /// Количество материала
         /// </summary>
-        public decimal? Count { get; set; }
+        public decimal Count { get; set; }
         
         public DAL.Entity.Material GetEntity()
         {

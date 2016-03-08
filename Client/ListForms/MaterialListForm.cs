@@ -17,7 +17,7 @@ namespace Client.ListForms
         }
 
 
-        public override void RebindGrid(object sender, EventArgs e)
+        public void RebindGrid(object sender, EventArgs e)
         {
 
             materialGridView.DataSource = Program.PerformCall(

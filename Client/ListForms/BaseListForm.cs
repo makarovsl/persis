@@ -5,7 +5,7 @@ using Client.Extensions;
 
 namespace Client.ListForms
 {
-    public abstract class BaseListForm : Form
+    public class BaseListForm : Form
     {
         private readonly Type _detailFormType;
 
@@ -46,7 +46,5 @@ namespace Client.ListForms
                 }
             }
         }
-
-        public abstract void RebindGrid(object sender, EventArgs e);
     }
 }

@@ -5,7 +5,7 @@ namespace Core.Models.Detail
     /// <summary>
     /// Модель-ответ для вывода табличного представления деталей
     /// </summary>
-    public class DetailListAnswer : IListAnswer
+    public class DetailListAnswer 
     {
         /// <summary>
         /// Идентификатор детали

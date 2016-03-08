@@ -51,7 +51,7 @@
     <Compile Include="Models\Detail\DetailListAnswer.cs" />
     <Compile Include="Models\Detail\DetailListModel.cs" />
     <Compile Include="Models\Detail\DetailUpdateModel.cs" />
-    <Compile Include="Models\IListAnswer.cs" />
+    <Compile Include="Models\IAnswerModel.cs" />
     <Compile Include="Models\Product\ProductAddModel.cs" />
     <Compile Include="Models\Product\ProductDetailAnswer.cs" />
     <Compile Include="Models\Product\ProductListAnswer.cs" />
@@ -66,6 +66,7 @@
     <Compile Include="OperationInterfaces\IDetailAction.cs" />
     <Compile Include="OperationInterfaces\IMaterialAction.cs" />
     <Compile Include="OperationInterfaces\IProductAction.cs" />
+    <Compile Include="OperationInterfaces\ISaveAction.cs" />
     <Compile Include="Operations\DetailAction.cs" />
     <Compile Include="Operations\MaterialAction.cs" />
     <Compile Include="Operations\ProductAction.cs" />

@@ -59,7 +59,6 @@
             this.buttonOk.TabIndex = 1;
             this.buttonOk.Text = "OK";
             this.buttonOk.UseVisualStyleBackColor = true;
-            this.buttonOk.Click += new System.EventHandler(this.SaveEndExit);
             // 
             // buttonCancel
             // 
@@ -70,7 +69,6 @@
             this.buttonCancel.TabIndex = 0;
             this.buttonCancel.Text = "Отмена";
             this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.Exit);
             // 
             // label1
             // 
@@ -125,7 +123,6 @@
             this.Controls.Add(this.panel1);
             this.Name = "MaterialDetailForm";
             this.Text = "MaterialDetailForm";
-            this.Shown += new System.EventHandler(this.RebindData);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.materialCountUpDown)).EndInit();
             this.ResumeLayout(false);

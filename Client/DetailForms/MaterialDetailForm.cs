@@ -1,83 +1,42 @@
 ﻿using System;
-using System.Windows.Forms;
 using Core.Models.Material;
 using Core.OperationInterfaces;
 
 namespace Client.DetailForms
 {
-    public partial class MaterialDetailForm : Form
+    public partial class MaterialDetailForm :  BaseDetailForm<MaterialUpdateModel, MaterialAddModel, MaterialDetailAnswer>
     {
-        private readonly IMaterialAction _materialAction;
-        private readonly Guid _materialId;
-        private MaterialDetailAnswer _materialParams;
 
-        public MaterialDetailForm(Guid materialId)
+        protected sealed override MaterialAddModel AddModel { get; set; }
+        public MaterialDetailForm(Guid materialId):base(Program.Resolve<IMaterialAction>(), materialId)
         {
-            _materialAction = Program.Resolve<IMaterialAction>();
-            _materialId = materialId;
+
+            AddModel = new MaterialAddModel();
 
             InitializeComponent();
+
+            buttonCancel.Click += Exit;
+            buttonOk.Click += SaveEndExit;
+
+            RebindData();
         }
 
-        public void RebindData(object sender, EventArgs e)
+        private void Bind<T>(T model)
         {
-            if (!_materialId.Equals(Guid.Empty))
-            {
-                _materialParams = Program.PerformCall(_materialId, _materialAction.GetDetail);
-                if (_materialParams == null)
-                {
-                    Close();
-                    return;
-                }
-                materialNameTB.Text = _materialParams.Name;
-                materialCountUpDown.Value = _materialParams.Count;
-                Text = String.Format("Редактирование материала : \"{0}\"", _materialParams.Name);
-            }
-            else
-            {
-                _materialParams = new MaterialDetailAnswer();
-                Text = @"Добавление материала";
-            }
-
+            materialNameTB.DataBindings.Add("Text", model, "Name");
+            materialCountUpDown.DataBindings.Add("Value", model, "Count");
+            materialNameTB.KeyDown += DataWasChanged;
+            materialCountUpDown.KeyDown += DataWasChanged;
         }
-        public void Exit(object sender, EventArgs e)
+
+        protected override void BindData(MaterialAddModel model)
         {
-            if (_materialParams.Count != materialCountUpDown.Value || _materialParams.Name != materialNameTB.Text)
-                if (MessageBox.Show(@"Вы действительно хотите выйти без сохранения?", @"Сохранение",
-                        MessageBoxButtons.YesNo) == DialogResult.No)
-                    return;
-
-            Close();
+            Bind(model);
         }
 
-        private void SaveEndExit(object sender, EventArgs e)
+        protected override void BindData(MaterialUpdateModel model)
         {
-            Guid newId;
-            if (!_materialId.Equals(Guid.Empty))
-            {
-                newId = Program.PerformCall(new MaterialUpdateModel
-                {
-                    Id = _materialParams.Id,
-                    Name = materialNameTB.Text,
-                    Count = materialCountUpDown.Value
-                }, _materialAction.Update);
-            }
-            else
-            {
-                newId = Program.PerformCall(new MaterialAddModel
-                {
-                   Name = materialNameTB.Text,
-                   Count = materialCountUpDown.Value
-                }, _materialAction.Add);
-            }
-            if (newId == Guid.Empty)
-                    return;
-            
-
-            MessageBox.Show(@"Сохранение успешно завершено", String.Format("Материал \"{0}\"", materialNameTB.Text));
-            Close();
+            Bind(model);
         }
-
-
     }
 }

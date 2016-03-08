@@ -50,7 +50,6 @@
             this.buttonOk.TabIndex = 1;
             this.buttonOk.Text = "OK";
             this.buttonOk.UseVisualStyleBackColor = true;
-            this.buttonOk.Click += new System.EventHandler(this.SaveEndExit);
             // 
             // buttonCancel
             // 
@@ -61,7 +60,6 @@
             this.buttonCancel.TabIndex = 0;
             this.buttonCancel.Text = "Отмена";
             this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.Exit);
             // 
             // panel1
             // 

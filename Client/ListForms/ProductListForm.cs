@@ -18,7 +18,7 @@ namespace Client.ListForms
             productGridView.CellClick += CellClick;
         }
 
-        public override void RebindGrid(object sender, EventArgs e)
+        public void RebindGrid(object sender, EventArgs e)
         {
 
             productGridView.DataSource = Program.PerformCall(
