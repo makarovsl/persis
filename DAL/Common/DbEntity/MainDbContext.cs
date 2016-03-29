@@ -24,6 +24,7 @@ namespace DAL.Common.DbEntity
 
         public MainDbContext() : base(ConfigurationManager.ConnectionStrings["MainConnectionString"].ConnectionString)
         {
+            Database.SetInitializer<MainDbContext>(null);
         }
 
         /// <summary>
